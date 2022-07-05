@@ -1043,7 +1043,7 @@ defaultproperties
     DamageToMonsterScale=5.000000
     ZombieFlag=3
     MeleeDamage=35
-    MGFireInterval=5.5
+    MGFireInterval=15.0
     MGDamage=2.0
     MGAccuracy=0.04
     MGFireRate=0.06
