@@ -4,7 +4,7 @@ Killing Floor modification that gives Fleshpounds the Patriarchs' Minigun.
 
 ## Installation
 
-- Download the release from
+- Download the release from(TBA).
 - Copy all of the contents within the zip file into your Killing Floor directory.
 
 ## Usage
