@@ -78,7 +78,7 @@ defaultproperties
     // Don't be active with TWI muts
     GroupName="KF-MonsterMut"
     FriendlyName="Ranged Fleshpounds"
-    Description="Fleshpounds now have Chainguns. Have fun!"
+    Description="Regular Fleshpounds are replaced with their Chaingun variant. Have fun!"
 
     bAlwaysRelevant=true
     RemoteRole=ROLE_SimulatedProxy
