@@ -34,7 +34,7 @@ defaultproperties
      ChallengeSound(1)=SoundGroup'KF_EnemiesFinalSnd_CIRCUS.Fleshpound.FP_Challenge'
      ChallengeSound(2)=SoundGroup'KF_EnemiesFinalSnd_CIRCUS.Fleshpound.FP_Challenge'
      ChallengeSound(3)=SoundGroup'KF_EnemiesFinalSnd_CIRCUS.Fleshpound.FP_Challenge'
-     MenuName="Circus Flesh Pound Gunner"
+     MenuName="Fleshclown Gunner"
      AmbientSound=SoundGroup'KF_EnemiesFinalSnd_CIRCUS.Fleshpound.FP_Idle'
      Mesh=SkeletalMesh'RangedPound.FleshpoundGunner_Summer'
      Skins(0)=Shader'KF_Specimens_Trip_CIRCUS_T.pound_CIRCUS.pound_CIRCUS_Amber_Shdr'

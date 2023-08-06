@@ -30,7 +30,7 @@ defaultproperties
      ChallengeSound(1)=SoundGroup'KF_EnemiesFinalSnd_Xmas.Fleshpound.FP_Challenge'
      ChallengeSound(2)=SoundGroup'KF_EnemiesFinalSnd_Xmas.Fleshpound.FP_Challenge'
      ChallengeSound(3)=SoundGroup'KF_EnemiesFinalSnd_Xmas.Fleshpound.FP_Challenge'
-     MenuName="Christmas FleshPound Gunner"
+     MenuName="Nutpound Gunner"
      AmbientSound=SoundGroup'KF_EnemiesFinalSnd_Xmas.Fleshpound.FP_Idle'
      Mesh=SkeletalMesh'RangedPound.FleshpoundGunner_XMas'
      Skins(0)=Combiner'KF_Specimens_Trip_XMAS_T.NutPound.NutPound_cmb'

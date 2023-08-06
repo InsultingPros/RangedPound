@@ -20,7 +20,7 @@ defaultproperties
      ChallengeSound(1)=SoundGroup'KF_EnemiesFinalSnd_HALLOWEEN.Fleshpound.FP_Challenge'
      ChallengeSound(2)=SoundGroup'KF_EnemiesFinalSnd_HALLOWEEN.Fleshpound.FP_Challenge'
      ChallengeSound(3)=SoundGroup'KF_EnemiesFinalSnd_HALLOWEEN.Fleshpound.FP_Challenge'
-     MenuName="HALLOWEEN Flesh Pound Gunner"
+     MenuName="Bubba Gunner"
      AmbientSound=Sound'KF_BaseFleshpound_HALLOWEEN.FP_Idle1Loop'
      Mesh=SkeletalMesh'RangedPound.FleshpoundGunner_Halloween'
      Skins(0)=Combiner'KF_Specimens_Trip_HALLOWEEN_T.Fleshpound.Fleshpound_RedneckZombie_CMB'
