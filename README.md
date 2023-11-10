@@ -1,5 +1,7 @@
 # Ranged Pound
 
+[![GitHub all releases](https://img.shields.io/github/downloads/theengineertcr/RangedPound/total)](https://github.com/theengineertcr/RangedPound/releases)
+
 Killing Floor modification that gives Fleshpounds the Patriarchs' Minigun.
 
 ## Installation
