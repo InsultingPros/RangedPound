@@ -1,1 +1,21 @@
-WIP
+Killing Floor modification that gives Fleshpounds the Patriarchs' Minigun.
+
+
+Usage: Enable the "Ranged Pounds" mutator, select a map, Killing Floor Gametype and difficulty, then start the game. Fleshpounds will automatically be replaced with their Chaingunner counterpart.
+
+
+Command Line for Server Owners: Mutator=RangedPound.MutRangedPound
+
+
+Monster List/Summon Codes:
+
+Package name is "RangedPound", Specimen names are:
+ZFPRA_S
+ZFPRA_C
+ZFPRA_H
+ZFPRA_X
+
+
+S(Standard), C(Circus), H(Halloween), X(Xmas)
+
+Github Page: https://github.com/theengineertcr/RangedPound
