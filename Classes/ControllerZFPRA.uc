@@ -12,22 +12,22 @@ var     float       RageFrustrationThreshhold;  // Base value for how long the F
 
 state ZombieHunt
 {
-	event SeePlayer(Pawn SeenPlayer)
-	{
-		if ( !bDoneSpottedCheck && PlayerController(SeenPlayer.Controller) != none )
-		{
-			// 25% chance of first player to see this Fleshpound saying something
-			if ( !KFGameType(Level.Game).bDidSpottedFleshpoundMessage && FRand() < 0.25 )
-			{
-				PlayerController(SeenPlayer.Controller).Speech('AUTO', 12, "");
-				KFGameType(Level.Game).bDidSpottedFleshpoundMessage = true;
-			}
+    event SeePlayer(Pawn SeenPlayer)
+    {
+        if ( !bDoneSpottedCheck && PlayerController(SeenPlayer.Controller) != none )
+        {
+            // 25% chance of first player to see this Fleshpound saying something
+            if ( !KFGameType(Level.Game).bDidSpottedFleshpoundMessage && FRand() < 0.25 )
+            {
+                PlayerController(SeenPlayer.Controller).Speech('AUTO', 12, "");
+                KFGameType(Level.Game).bDidSpottedFleshpoundMessage = true;
+            }
 
-			bDoneSpottedCheck = true;
-		}
+            bDoneSpottedCheck = true;
+        }
 
-		super.SeePlayer(SeenPlayer);
-	}
+        super.SeePlayer(SeenPlayer);
+    }
 }
 
 // Don't ever do this
@@ -62,14 +62,14 @@ function TimedFireWeaponAtEnemy()
 
 state ZombieCharge
 {
-	function Tick( float Delta )
-	{
-		local ZFPRA ZFP;
+    function Tick( float Delta )
+    {
+        local ZFPRA ZFP;
         Global.Tick(Delta);
 
         // Make the FP rage if we haven't reached our enemy after a certain amount of time
-		if( RageFrustrationTimer < RageFrustrationThreshhold )
-		{
+        if( RageFrustrationTimer < RageFrustrationThreshhold )
+        {
             RageFrustrationTimer += Delta;
 
             if( RageFrustrationTimer >= RageFrustrationThreshhold )
@@ -82,8 +82,8 @@ state ZombieCharge
                     ZFP.bFrustrated = true;
                 }
             }
-		}
-	}
+        }
+    }
 
     function bool StrafeFromDamage(float Damage, class<DamageType> DamageType, bool bFindDest)
     {
@@ -102,13 +102,13 @@ state ZombieCharge
         TimedFireWeaponAtEnemy();
     }
 
-	function BeginState()
-	{
+    function BeginState()
+    {
         super.BeginState();
 
         RageFrustrationThreshhold = default.RageFrustrationThreshhold + (Frand() * 5);
         RageFrustrationTimer = 0;
-	}
+    }
 
 WaitForAnim:
 
@@ -142,25 +142,25 @@ Ignores SeePlayer,HearNoise,Timer,EnemyNotVisible,NotifyBump,Startle;
 
     function GetOutOfTheWayOfShot(vector ShotDirection, vector ShotOrigin){}
 
-	function BeginState()
-	{
+    function BeginState()
+    {
         bUseFreezeHack = False;
-	}
+    }
 
-	// The rage anim has ended, clear the flags and let the AI do its thing
+    // The rage anim has ended, clear the flags and let the AI do its thing
     function RageTimeout()
-	{
+    {
         if( bUseFreezeHack )
-		{
+        {
             if( Pawn!=None )
-    		{
-    			Pawn.AccelRate = Pawn.Default.AccelRate;
-    			Pawn.GroundSpeed = Pawn.Default.GroundSpeed;
-    		}
-    		bUseFreezeHack = False;
-    		AnimEnd(0);
-		}
-	}
+            {
+                Pawn.AccelRate = Pawn.Default.AccelRate;
+                Pawn.GroundSpeed = Pawn.Default.GroundSpeed;
+            }
+            bUseFreezeHack = False;
+            AnimEnd(0);
+        }
+    }
 
     function WaitTimeout()
     {
@@ -200,8 +200,8 @@ Ignores SeePlayer,HearNoise,Timer,EnemyNotVisible,NotifyBump,Startle;
             }
         }
 
-		if( RageAnimTimeout > 0 )
-		{
+        if( RageAnimTimeout > 0 )
+        {
             RageAnimTimeout -= Delta;
 
             if( RageAnimTimeout <= 0 )
@@ -209,7 +209,7 @@ Ignores SeePlayer,HearNoise,Timer,EnemyNotVisible,NotifyBump,Startle;
                 RageAnimTimeout = 0;
                 RageTimeout();
             }
-		}
+        }
 
         if( bUseFreezeHack )
         {
@@ -225,21 +225,21 @@ Ignores SeePlayer,HearNoise,Timer,EnemyNotVisible,NotifyBump,Startle;
         super.EndState();
 
         if( Pawn!=None )
-		{
-			Pawn.AccelRate = Pawn.Default.AccelRate;
-			Pawn.GroundSpeed = Pawn.Default.GroundSpeed;
-		}
-		bUseFreezeHack = False;
+        {
+            Pawn.AccelRate = Pawn.Default.AccelRate;
+            Pawn.GroundSpeed = Pawn.Default.GroundSpeed;
+        }
+        bUseFreezeHack = False;
 
         AnimWaitingFor = '';
     }
 
 Begin:
-	While( KFM.bShotAnim )
-	{
-    	Sleep(0.15);
-	}
-	WhatToDoNext(99);
+    While( KFM.bShotAnim )
+    {
+        Sleep(0.15);
+    }
+    WhatToDoNext(99);
 
 }
 defaultproperties

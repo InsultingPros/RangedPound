@@ -1,5 +1,5 @@
 class DamTypeMG extends KFProjectileWeaponDamageType
-	abstract;
+    abstract;
 
 defaultproperties
 {

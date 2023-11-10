@@ -3,7 +3,7 @@ class ZFPRA_H extends ZFPRA;
 
 function PatriarchMGPreFire()
 {
-	PlaySound(Sound'KF_BaseFleshpound_HALLOWEEN.FP_Talk03', SLOT_Misc, 2.0,true,1000.0);
+    PlaySound(Sound'KF_BaseFleshpound_HALLOWEEN.FP_Talk03', SLOT_Misc, 2.0,true,1000.0);
 }
 
 defaultproperties

@@ -3,17 +3,17 @@ class ZFPRA_X extends ZFPRA;
 
 function PatriarchMGPreFire()
 {
-	PlaySound(Sound'KF_BaseFleshpound_XMas.FP_Talk28', SLOT_Misc, 2.0,true,1000.0);
+    PlaySound(Sound'KF_BaseFleshpound_XMas.FP_Talk28', SLOT_Misc, 2.0,true,1000.0);
 }
 
 simulated function DeviceGoRed()
 {
-	Skins[2]=Shader'KFCharacters.FPRedBloomShader';
+    Skins[2]=Shader'KFCharacters.FPRedBloomShader';
 }
 
 simulated function DeviceGoNormal()
 {
-	Skins[2] = Shader'KFCharacters.FPAmberBloomShader';
+    Skins[2] = Shader'KFCharacters.FPAmberBloomShader';
 }
 
 defaultproperties
