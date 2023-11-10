@@ -150,7 +150,7 @@ Ignores SeePlayer,HearNoise,Timer,EnemyNotVisible,NotifyBump,Startle;
 
     function BeginState()
     {
-        bUseFreezeHack = False;
+        bUseFreezeHack = false;
     }
 
     // The rage anim has ended, clear the flags and let the AI do its thing
@@ -158,12 +158,12 @@ Ignores SeePlayer,HearNoise,Timer,EnemyNotVisible,NotifyBump,Startle;
     {
         if( bUseFreezeHack )
         {
-            if( Pawn!=None )
+            if( Pawn!=none )
             {
-                Pawn.AccelRate = Pawn.Default.AccelRate;
-                Pawn.GroundSpeed = Pawn.Default.GroundSpeed;
+                Pawn.AccelRate = Pawn.default.AccelRate;
+                Pawn.GroundSpeed = Pawn.default.GroundSpeed;
             }
-            bUseFreezeHack = False;
+            bUseFreezeHack = false;
             AnimEnd(0);
         }
     }
@@ -230,12 +230,12 @@ Ignores SeePlayer,HearNoise,Timer,EnemyNotVisible,NotifyBump,Startle;
     {
         super.EndState();
 
-        if( Pawn!=None )
+        if( Pawn!=none )
         {
-            Pawn.AccelRate = Pawn.Default.AccelRate;
-            Pawn.GroundSpeed = Pawn.Default.GroundSpeed;
+            Pawn.AccelRate = Pawn.default.AccelRate;
+            Pawn.GroundSpeed = Pawn.default.GroundSpeed;
         }
-        bUseFreezeHack = False;
+        bUseFreezeHack = false;
 
         AnimWaitingFor = '';
     }

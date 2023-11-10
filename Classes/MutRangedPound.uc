@@ -11,7 +11,7 @@ class MutRangedPound extends Mutator;
 
 function PostBeginPlay()
 {
-    SetTimer(0.1,False);
+    SetTimer(0.1,false);
 }
 
 function Timer()
@@ -28,7 +28,7 @@ function Timer()
         return;
     }
 
-    if ( KF!=None )
+    if ( KF!=none )
     {
         for( i=0; i<KF.InitSquads.Length; i++ )
         {
@@ -51,18 +51,18 @@ function Timer()
 }
 
 //In the order of seasons, chronologically :)
-final function Class<KFMonster> GetReplaceClass( Class<KFMonster> MC )
+final function class<KFMonster> GetReplaceClass( class<KFMonster> MC )
 {
     switch( MC )
     {
-    case Class'ZombieFleshpound_STANDARD':
-        return Class'ZFPRA_S';
-    case Class'ZombieFleshpound_CIRCUS':
-        return Class'ZFPRA_C';
-    case Class'ZombieFleshpound_HALLOWEEN':
-        return Class'ZFPRA_H';
-    case Class'ZombieFleshpound_XMAS':
-        return Class'ZFPRA_X';
+    case class'ZombieFleshpound_STANDARD':
+        return class'ZFPRA_S';
+    case class'ZombieFleshpound_CIRCUS':
+        return class'ZFPRA_C';
+    case class'ZombieFleshpound_HALLOWEEN':
+        return class'ZFPRA_H';
+    case class'ZombieFleshpound_XMAS':
+        return class'ZFPRA_X';
     default:
         return MC;
     }

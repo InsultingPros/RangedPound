@@ -4,7 +4,7 @@
  * License      : GPL 3.0
  * Copyright    : 2023 theengineertcr
  */
-Class ZFPRABase extends KFMonster;
+class ZFPRABase extends KFMonster;
 
 var bool bChargingPlayer,bClientCharge;
 var bool    bFrustrated;
@@ -59,7 +59,7 @@ defaultproperties
     BleedOutDuration=7.000000
     ZapThreshold=1.750000
     ZappedDamageMod=1.250000
-    bHarpoonToBodyStuns=False
+    bHarpoonToBodyStuns=false
     DamageToMonsterScale=5.000000
     ZombieFlag=3
     MeleeDamage=35
@@ -69,11 +69,11 @@ defaultproperties
     MGFireRate=0.06
     MGFireBurst=15
     damageForce=15000
-    bFatAss=True
+    bFatAss=true
     KFRagdollName="FleshPound_Trip"
-    bMeleeStunImmune=True
+    bMeleeStunImmune=true
     Intelligence=BRAINS_Mammal
-    bUseExtendedCollision=True
+    bUseExtendedCollision=true
     ColOffset=(Z=52.000000)
     ColRadius=36.000000
     ColHeight=35.000000
@@ -86,7 +86,7 @@ defaultproperties
     HeadHealth=700.000000
     PlayerNumHeadHealthScale=0.300000
     MotionDetectorThreat=5.000000
-    bBoss=True
+    bBoss=true
     ScoringValue=200
     RagDeathUpKick=100.000000
     MeleeRange=55.000000
