@@ -1,3 +1,9 @@
+/*
+ * Author       : theengineertcr
+ * Home Repo    : https://github.com/theengineertcr/RangedPound
+ * License      : GPL 3.0
+ * Copyright    : 2023 theengineertcr
+ */
 Class ZFPRABase extends KFMonster;
 
 var bool bChargingPlayer,bClientCharge;

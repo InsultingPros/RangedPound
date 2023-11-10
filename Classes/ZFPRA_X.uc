@@ -1,4 +1,11 @@
-//XMas Variant
+/*
+ * XMas Variant
+ *
+ * Author       : theengineertcr
+ * Home Repo    : https://github.com/theengineertcr/RangedPound
+ * License      : GPL 3.0
+ * Copyright    : 2023 theengineertcr
+ */
 class ZFPRA_X extends ZFPRA;
 
 function PatriarchMGPreFire()

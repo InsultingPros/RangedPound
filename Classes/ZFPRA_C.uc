@@ -1,4 +1,11 @@
-//Circus Variant
+/*
+ * Circus Variant
+ *
+ * Author       : theengineertcr
+ * Home Repo    : https://github.com/theengineertcr/RangedPound
+ * License      : GPL 3.0
+ * Copyright    : 2023 theengineertcr
+ */
 class ZFPRA_C extends ZFPRA;
 
 #exec OBJ LOAD FILE=KF_BaseFleshpound_CIRCUS.uax

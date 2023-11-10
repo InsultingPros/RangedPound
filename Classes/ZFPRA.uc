@@ -1,4 +1,11 @@
-//Alternate take on the zed, which is basically OldSchool RangedPound
+/*
+ * Alternate take on the zed, which is basically OldSchool RangedPound
+ *
+ * Author       : theengineertcr
+ * Home Repo    : https://github.com/theengineertcr/RangedPound
+ * License      : GPL 3.0
+ * Copyright    : 2023 theengineertcr
+ */
 class ZFPRA extends ZFPRABase
     Abstract;
 

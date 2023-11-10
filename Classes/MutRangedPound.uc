@@ -1,5 +1,12 @@
-// Mutator that replaces Fleshpounds(including seasonal variants) with their gunner counter-part
-// All code taken from Marco's Mixed Zeds Mut
+/*
+ * Mutator that replaces Fleshpounds(including seasonal variants) with their gunner counter-part
+ * All code taken from Marco's Mixed Zeds Mut
+ *
+ * Author       : theengineertcr
+ * Home Repo    : https://github.com/theengineertcr/RangedPound
+ * License      : GPL 3.0
+ * Copyright    : 2023 theengineertcr
+ */
 class MutRangedPound extends Mutator;
 
 function PostBeginPlay()

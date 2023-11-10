@@ -1,5 +1,12 @@
-// Original, untouched code
-// Zombie Monster for KF Invasion gametype
+/*
+ * Original, untouched code
+ * Zombie Monster for KF Invasion gametype
+ *
+ * Author       : theengineertcr
+ * Home Repo    : https://github.com/theengineertcr/RangedPound
+ * License      : GPL 3.0
+ * Copyright    : 2023 theengineertcr
+ */
 class ZFPR extends ZombieFleshPound_STANDARD;
 
 var float NextMinigunTime;
