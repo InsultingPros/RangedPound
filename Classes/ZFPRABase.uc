@@ -29,10 +29,10 @@ var(Sounds)     sound   MiniGunFireSound;
 var(Sounds)     sound   MiniGunSpinSound;
 var() vector RotMag;
 var() vector RotRate;
-var() float	RotTime;
+var() float    RotTime;
 var() vector OffsetMag;
 var() vector OffsetRate;
-var() float	OffsetTime;
+var() float    OffsetTime;
 var FleshPoundAvoidArea AvoidArea;
 var name ChargingAnim;
 

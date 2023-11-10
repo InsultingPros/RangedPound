@@ -12,7 +12,7 @@ var     float       WaitAnimTimeout;
 var     int         AnimWaitChannel;
 var     name        AnimWaitingFor;
 var     float       RageAnimTimeout;
-var		bool		bDoneSpottedCheck;
+var        bool        bDoneSpottedCheck;
 var     float       RageFrustrationTimer;       // Tracks how long we have been walking toward a visible enemy
 var     float       RageFrustrationThreshhold;  // Base value for how long the FP should walk torward an enemy without reaching them before getting frustrated and raging
 
