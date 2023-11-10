@@ -1,50 +1,54 @@
-Class ZFPRABase extends KFMonster;
+/*
+ * Author       : theengineertcr
+ * Home Repo    : https://github.com/theengineertcr/RangedPound
+ * License      : GPL 3.0
+ * Copyright    : 2023 theengineertcr
+ */
+class ZFPRABase extends KFMonster;
 
-var bool bChargingPlayer,bClientCharge;
-var bool    bFrustrated;
+var bool bChargingPlayer, bClientCharge;
+var bool bFrustrated;
 var int TwoSecondDamageTotal;
-var float LastDamagedTime,RageEndTime;
-var () int RageDamageThreshold;
-var bool bFireAtWill,bMinigunning;
+var float LastDamagedTime, RageEndTime;
+var() int RageDamageThreshold;
+var bool bFireAtWill, bMinigunning;
 var float LastChainGunTime;
 var vector TraceHitPos;
-var Emitter mTracer,mMuzzleFlash;
+var Emitter mTracer, mMuzzleFlash;
 var int MGFireCounter;
 var bool bClientMiniGunning;
-var             float   MGLostSightTimeout;
-var()           float   MGDamage;
-var()             float    MGAccuracy;
-var()            float    MGFireRate;
-var()             int     MGFireBurst;
-var()   float   MGFireInterval;
-var () class <DamageType> MGDamageType;
+var float MGLostSightTimeout;
+var() float MGDamage;
+var() float MGAccuracy;
+var() float MGFireRate;
+var() int MGFireBurst;
+var() float MGFireInterval;
+var() class <DamageType> MGDamageType;
 
-var(Sounds)     sound   MiniGunFireSound;
-var(Sounds)     sound   MiniGunSpinSound;
+var(Sounds) sound MiniGunFireSound;
+var(Sounds) sound MiniGunSpinSound;
 var() vector RotMag;
 var() vector RotRate;
-var() float	RotTime;
+var() float RotTime;
 var() vector OffsetMag;
 var() vector OffsetRate;
-var() float	OffsetTime;
+var() float OffsetTime;
 var FleshPoundAvoidArea AvoidArea;
 var name ChargingAnim;
 
 //Variables for tweaking under the mutator
-var() float MGDamMult; // Minigun  Damage Multiplier
-var() float MGAccMult;  // Minigun Accuracy Multiplier
-var() float MGRoFMult; // Minigun Rate of Fire Multiplier
-var() float MGBurstMult; // Minigun Burst Multiplier
-var() float MGDelayMult; // Minigun Delay Multiplier
+var() float MGDamMult;      // Minigun Damage Multiplier
+var() float MGAccMult;      // Minigun Accuracy Multiplier
+var() float MGRoFMult;      // Minigun Rate of Fire Multiplier
+var() float MGBurstMult;    // Minigun Burst Multiplier
+var() float MGDelayMult;    // Minigun Delay Multiplier
 
-replication
-{
-    reliable if( Role==ROLE_Authority )
-        bChargingPlayer, bFrustrated,TraceHitPos,bMinigunning;
+replication {
+    reliable if (Role == ROLE_Authority)
+        bChargingPlayer, bFrustrated, TraceHitPos, bMinigunning;
 }
 
-defaultproperties
-{
+defaultproperties {
     RageDamageThreshold=360
     MiniGunFireSound=Sound'KF_BasePatriarch.Attack.Kev_MG_GunfireLoop'
     MiniGunSpinSound=Sound'KF_BasePatriarch.Attack.Kev_MG_TurbineFireLoop'
@@ -53,7 +57,7 @@ defaultproperties
     BleedOutDuration=7.000000
     ZapThreshold=1.750000
     ZappedDamageMod=1.250000
-    bHarpoonToBodyStuns=False
+    bHarpoonToBodyStuns=false
     DamageToMonsterScale=5.000000
     ZombieFlag=3
     MeleeDamage=35
@@ -63,11 +67,11 @@ defaultproperties
     MGFireRate=0.06
     MGFireBurst=15
     damageForce=15000
-    bFatAss=True
+    bFatAss=true
     KFRagdollName="FleshPound_Trip"
-    bMeleeStunImmune=True
+    bMeleeStunImmune=true
     Intelligence=BRAINS_Mammal
-    bUseExtendedCollision=True
+    bUseExtendedCollision=true
     ColOffset=(Z=52.000000)
     ColRadius=36.000000
     ColHeight=35.000000
@@ -80,7 +84,7 @@ defaultproperties
     HeadHealth=700.000000
     PlayerNumHeadHealthScale=0.300000
     MotionDetectorThreat=5.000000
-    bBoss=True
+    bBoss=true
     ScoringValue=200
     RagDeathUpKick=100.000000
     MeleeRange=55.000000

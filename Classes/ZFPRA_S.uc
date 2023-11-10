@@ -1,19 +1,24 @@
-//Standard Variant
+/*
+ * Standard Variant
+ *
+ * Author       : theengineertcr
+ * Home Repo    : https://github.com/theengineertcr/RangedPound
+ * License      : GPL 3.0
+ * Copyright    : 2023 theengineertcr
+ */
 class ZFPRA_S extends ZFPRA;
 
-function PatriarchMGPreFire()
-{
-    PlaySound(Sound'KF_BaseFleshpound.FP_Challenge1', SLOT_Misc, 2.0,true,1000.0);
+function PatriarchMGPreFire() {
+    PlaySound(Sound'KF_BaseFleshpound.FP_Challenge1', SLOT_Misc, 2.0, true, 1000.0);
 }
 
-defaultproperties
-{
+defaultproperties {
     MoanVoice=SoundGroup'KF_EnemiesFinalSnd.Fleshpound.FP_Talk'
     MeleeAttackHitSound=SoundGroup'KF_EnemiesFinalSnd.Fleshpound.FP_HitPlayer'
     JumpSound=SoundGroup'KF_EnemiesFinalSnd.Fleshpound.FP_Jump'
-    DetachedArmClass=Class'KFChar.SeveredArmPound'
-    DetachedLegClass=Class'KFChar.SeveredLegPound'
-    DetachedHeadClass=Class'KFChar.SeveredHeadPound'
+    DetachedArmClass=class'KFChar.SeveredArmPound'
+    DetachedLegClass=class'KFChar.SeveredLegPound'
+    DetachedHeadClass=class'KFChar.SeveredHeadPound'
     HitSound(0)=SoundGroup'KF_EnemiesFinalSnd.Fleshpound.FP_Pain'
     DeathSound(0)=SoundGroup'KF_EnemiesFinalSnd.Fleshpound.FP_Death'
     ChallengeSound(0)=SoundGroup'KF_EnemiesFinalSnd.Fleshpound.FP_Challenge'

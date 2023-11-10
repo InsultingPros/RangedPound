@@ -1,4 +1,11 @@
-//Alternate take on the zed, which is basically OldSchool RangedPound
+/*
+ * Alternate take on the zed, which is basically OldSchool RangedPound
+ *
+ * Author       : theengineertcr
+ * Home Repo    : https://github.com/theengineertcr/RangedPound
+ * License      : GPL 3.0
+ * Copyright    : 2023 theengineertcr
+ */
 class ZFPRA extends ZFPRABase
     Abstract;
 
@@ -74,7 +81,7 @@ simulated function Destroyed()
         mTracer.Destroy();
     if( mMuzzleFlash!=none )
         mMuzzleFlash.Destroy();
-    if( AvoidArea!=None )
+    if( AvoidArea!=none )
         AvoidArea.Destroy();
 
     super.Destroyed();
@@ -82,10 +89,10 @@ simulated function Destroyed()
 
 simulated Function PostNetBeginPlay()
 {
-    if (AvoidArea == None)
+    if (AvoidArea == none)
         AvoidArea = Spawn(class'FleshPoundAvoidArea',self);
-    if (AvoidArea != None)
-        AvoidArea.InitFor(Self);
+    if (AvoidArea != none)
+        AvoidArea.InitFor(self);
 
     EnableChannelNotify ( 1,1);
     AnimBlendParams(1, 1.0, 0.0,, 'Bip01 Spine1');
@@ -234,7 +241,7 @@ function StartCharging()
     Velocity.X = 0;
     Velocity.Y = 0;
     Controller.GoToState('WaitForAnim');
-    KFMonsterController(Controller).bUseFreezeHack = True;
+    KFMonsterController(Controller).bUseFreezeHack = true;
     RageAnimDur = GetAnimDuration('PoundRage');
     ControllerZFPRA(Controller).SetPoundRageTimout(RageAnimDur);
     GoToState('BeginRaging');
@@ -353,7 +360,7 @@ Ignores StartCharging;
 
     function EndState()
     {
-        bChargingPlayer = False;
+        bChargingPlayer = false;
         bFrustrated = false;
 
         ControllerZFPRA(Controller).RageFrustrationTimer = 0;
@@ -383,7 +390,7 @@ Ignores StartCharging;
         // Keep the flesh pound moving toward its target when attacking
         if( Role == ROLE_Authority && bShotAnim)
         {
-            if( LookTarget!=None )
+            if( LookTarget!=none )
             {
                 Acceleration = AccelRate * Normal(LookTarget.Location - Location);
             }
@@ -400,7 +407,7 @@ Ignores StartCharging;
         KFMonst = KFMonster(Other);
 
         // Hurt/Kill enemies that we run into while raging
-        if( !bShotAnim && KFMonst!=None && ZombieFleshPound(Other)==None && Pawn(Other).Health>0 )
+        if( !bShotAnim && KFMonst!=none && ZombieFleshPound(Other)==none && Pawn(Other).Health>0 )
         {
             // Random chance of doing obliteration damage
             if( FRand() < 0.4 )
@@ -424,7 +431,7 @@ Ignores StartCharging;
         local bool RetVal,bWasEnemy;
 
         bWasEnemy = (Controller.Target==Controller.Enemy);
-        RetVal = Super.MeleeDamageTarget(hitdamage*1.75, pushdir*3);
+        RetVal = super.MeleeDamageTarget(hitdamage*1.75, pushdir*3);
         if( RetVal && bWasEnemy )
             GoToState('');
         return RetVal;
@@ -453,7 +460,7 @@ Ignores StartCharging;
         // Keep the flesh pound moving toward its target when attacking
         if( Role == ROLE_Authority && bShotAnim)
         {
-            if( LookTarget!=None )
+            if( LookTarget!=none )
             {
                 Acceleration = AccelRate * Normal(LookTarget.Location - Location);
             }
@@ -465,7 +472,7 @@ Ignores StartCharging;
 
 simulated function PlayDyingAnimation(class<DamageType> DamageType, vector HitLoc)
 {
-    Super.PlayDyingAnimation(DamageType,HitLoc);
+    super.PlayDyingAnimation(DamageType,HitLoc);
     if( Level.NetMode!=NM_DedicatedServer )
         DeviceGoNormal();
 }
@@ -481,13 +488,13 @@ simulated function AddTraceHitFX( vector HitPos )
     local float hitDist;
 
     Start = GetBoneCoords('tip').Origin;
-    if( mTracer==None )
-        mTracer = Spawn(Class'KFMod.KFNewTracer',,,Start);
+    if( mTracer==none )
+        mTracer = Spawn(class'KFMod.KFNewTracer',,,Start);
     else mTracer.SetLocation(Start);
-    if( mMuzzleFlash==None )
+    if( mMuzzleFlash==none )
     {
         // KFTODO: Replace this
-        mMuzzleFlash = Spawn(Class'MuzzleFlash3rdMG');
+        mMuzzleFlash = Spawn(class'MuzzleFlash3rdMG');
         AttachToBone(mMuzzleFlash, 'tip');
     }
     else mMuzzleFlash.SpawnParticle(1);
@@ -507,7 +514,7 @@ simulated function AddTraceHitFX( vector HitPos )
         mTracer.Emitters[0].LifetimeRange.Max = mTracer.Emitters[0].LifetimeRange.Min;
         mTracer.SpawnParticle(1);
     }
-    Instigator = Self;
+    Instigator = self;
 
     if( HitPos != vect(0,0,0) )
     {
@@ -526,7 +533,7 @@ simulated function AnimEnd( int Channel )
 
         if( Sequence != 'PreFireMG' && Sequence != 'FireMG' )
         {
-            Super.AnimEnd(Channel);
+            super.AnimEnd(Channel);
             return;
         }
 
@@ -535,7 +542,7 @@ simulated function AnimEnd( int Channel )
         bShotAnim = true;
         IdleTime = Level.TimeSeconds;
     }
-    else Super.AnimEnd(Channel);
+    else super.AnimEnd(Channel);
 }
 
 state FireChaingun
@@ -656,7 +663,7 @@ state FireChaingun
 
         if( A!=Level )
         {
-            // This spams server logs with "Accessed None PlayerReplicationInfo"
+            // This spams server logs with "Accessed none PlayerReplicationInfo"
             if(KFPlayerReplicationInfo(KFP.PlayerReplicationInfo).ClientVeteranSkill != class'KFVetBerserker' &&
                KFPlayerReplicationInfo(KFP.PlayerReplicationInfo) != none)
                 A.TakeDamage(MGDamage,self,HL,Dir*500,MGDamageType);
@@ -801,9 +808,9 @@ function ClawDamageTarget()
     if ( MeleeDamageTarget( UsedMeleeDamage, PushDir))
     {
         HumanTarget = KFHumanPawn(Controller.Target);
-        if( HumanTarget!=None )
+        if( HumanTarget!=none )
             HumanTargetController = KFPlayerController(HumanTarget.Controller);
-        if( HumanTargetController!=None )
+        if( HumanTargetController!=none )
             HumanTargetController.ShakeView(RotMag, RotRate, RotTime, OffsetMag, OffsetRate, OffsetTime);
         PlaySound(MeleeAttackHitSound, SLOT_Interact, 1.25);
     }
@@ -815,9 +822,9 @@ simulated function int DoAnimAction( name AnimName )
     {
         AnimBlendParams(1, 1.0, 0.0,, FireRootBone);
         PlayAnim(AnimName,, 0.1, 1);
-        Return 1;
+        return 1;
     }
-    Return Super.DoAnimAction(AnimName);
+    return super.DoAnimAction(AnimName);
 }
 
 simulated event SetAnimAction(name NewAction)
@@ -954,7 +961,7 @@ function TakeDamage( int Damage, Pawn InstigatedBy, Vector Hitlocation, Vector M
        Damage *= 0.25;
     }
 
-    Super.takeDamage(Damage, instigatedBy, hitLocation, momentum, damageType,HitIndex) ;
+    super.takeDamage(Damage, instigatedBy, hitLocation, momentum, damageType,HitIndex) ;
 
     TwoSecondDamageTotal += OldHealth - Health; // Corrected issue where only the Base Health is counted toward the FP's Rage in Balance Round 6(second attempt)
 //
@@ -979,7 +986,7 @@ simulated function Tick(float DeltaTime)
     // Keep the flesh pound moving toward its target when attacking
     if( Role == ROLE_Authority && bShotAnim)
     {
-        if( LookTarget!=None && !IsInState('FireChaingun') )
+        if( LookTarget!=none && !IsInState('FireChaingun') )
         {
             Acceleration = AccelRate * Normal(LookTarget.Location - Location);
         }
@@ -988,7 +995,7 @@ simulated function Tick(float DeltaTime)
 
 function bool SameSpeciesAs(Pawn P)
 {
-    return (ZombieFleshPound(P)!=None || ZFPRA(P)!=None);
+    return (ZombieFleshPound(P)!=none || ZFPRA(P)!=none);
 }
 
 defaultproperties
