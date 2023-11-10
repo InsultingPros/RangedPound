@@ -8,13 +8,11 @@
  */
 class ZFPRA_S extends ZFPRA;
 
-function PatriarchMGPreFire()
-{
-    PlaySound(Sound'KF_BaseFleshpound.FP_Challenge1', SLOT_Misc, 2.0,true,1000.0);
+function PatriarchMGPreFire() {
+    PlaySound(Sound'KF_BaseFleshpound.FP_Challenge1', SLOT_Misc, 2.0, true, 1000.0);
 }
 
-defaultproperties
-{
+defaultproperties {
     MoanVoice=SoundGroup'KF_EnemiesFinalSnd.Fleshpound.FP_Talk'
     MeleeAttackHitSound=SoundGroup'KF_EnemiesFinalSnd.Fleshpound.FP_HitPlayer'
     JumpSound=SoundGroup'KF_EnemiesFinalSnd.Fleshpound.FP_Jump'

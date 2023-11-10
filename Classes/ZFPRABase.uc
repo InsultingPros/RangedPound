@@ -6,51 +6,49 @@
  */
 class ZFPRABase extends KFMonster;
 
-var bool bChargingPlayer,bClientCharge;
-var bool    bFrustrated;
+var bool bChargingPlayer, bClientCharge;
+var bool bFrustrated;
 var int TwoSecondDamageTotal;
-var float LastDamagedTime,RageEndTime;
-var () int RageDamageThreshold;
-var bool bFireAtWill,bMinigunning;
+var float LastDamagedTime, RageEndTime;
+var() int RageDamageThreshold;
+var bool bFireAtWill, bMinigunning;
 var float LastChainGunTime;
 var vector TraceHitPos;
-var Emitter mTracer,mMuzzleFlash;
+var Emitter mTracer, mMuzzleFlash;
 var int MGFireCounter;
 var bool bClientMiniGunning;
-var             float   MGLostSightTimeout;
-var()           float   MGDamage;
-var()             float    MGAccuracy;
-var()            float    MGFireRate;
-var()             int     MGFireBurst;
-var()   float   MGFireInterval;
-var () class <DamageType> MGDamageType;
+var float MGLostSightTimeout;
+var() float MGDamage;
+var() float MGAccuracy;
+var() float MGFireRate;
+var() int MGFireBurst;
+var() float MGFireInterval;
+var() class <DamageType> MGDamageType;
 
-var(Sounds)     sound   MiniGunFireSound;
-var(Sounds)     sound   MiniGunSpinSound;
+var(Sounds) sound MiniGunFireSound;
+var(Sounds) sound MiniGunSpinSound;
 var() vector RotMag;
 var() vector RotRate;
-var() float    RotTime;
+var() float RotTime;
 var() vector OffsetMag;
 var() vector OffsetRate;
-var() float    OffsetTime;
+var() float OffsetTime;
 var FleshPoundAvoidArea AvoidArea;
 var name ChargingAnim;
 
 //Variables for tweaking under the mutator
-var() float MGDamMult; // Minigun  Damage Multiplier
-var() float MGAccMult;  // Minigun Accuracy Multiplier
-var() float MGRoFMult; // Minigun Rate of Fire Multiplier
-var() float MGBurstMult; // Minigun Burst Multiplier
-var() float MGDelayMult; // Minigun Delay Multiplier
+var() float MGDamMult;      // Minigun Damage Multiplier
+var() float MGAccMult;      // Minigun Accuracy Multiplier
+var() float MGRoFMult;      // Minigun Rate of Fire Multiplier
+var() float MGBurstMult;    // Minigun Burst Multiplier
+var() float MGDelayMult;    // Minigun Delay Multiplier
 
-replication
-{
-    reliable if( Role==ROLE_Authority )
-        bChargingPlayer, bFrustrated,TraceHitPos,bMinigunning;
+replication {
+    reliable if (Role == ROLE_Authority)
+        bChargingPlayer, bFrustrated, TraceHitPos, bMinigunning;
 }
 
-defaultproperties
-{
+defaultproperties {
     RageDamageThreshold=360
     MiniGunFireSound=Sound'KF_BasePatriarch.Attack.Kev_MG_GunfireLoop'
     MiniGunSpinSound=Sound'KF_BasePatriarch.Attack.Kev_MG_TurbineFireLoop'

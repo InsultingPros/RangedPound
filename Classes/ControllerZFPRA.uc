@@ -8,27 +8,25 @@ class ControllerZFPRA extends KFMonsterController;
 
 var NavigationPoint HidingSpots;
 
-var     float       WaitAnimTimeout;
-var     int         AnimWaitChannel;
-var     name        AnimWaitingFor;
-var     float       RageAnimTimeout;
-var        bool        bDoneSpottedCheck;
-var     float       RageFrustrationTimer;       // Tracks how long we have been walking toward a visible enemy
-var     float       RageFrustrationThreshhold;  // Base value for how long the FP should walk torward an enemy without reaching them before getting frustrated and raging
+var float WaitAnimTimeout;
+var int AnimWaitChannel;
+var name AnimWaitingFor;
+var float RageAnimTimeout;
+var bool bDoneSpottedCheck;
+var float RageFrustrationTimer;       // Tracks how long we have been walking toward a visible enemy
+var float RageFrustrationThreshhold;  // Base value for how long the FP should walk torward an enemy without reaching them before getting frustrated and raging
 
-state ZombieHunt
-{
-    event SeePlayer(Pawn SeenPlayer)
-    {
-        if ( !bDoneSpottedCheck && PlayerController(SeenPlayer.Controller) != none )
-        {
+// Don't ever do this
+function AvoidThisMonster(KFMonster Feared){}
+
+state ZombieHunt {
+    event SeePlayer(Pawn SeenPlayer) {
+        if (!bDoneSpottedCheck && PlayerController(SeenPlayer.Controller) != none) {
             // 25% chance of first player to see this Fleshpound saying something
-            if ( !KFGameType(Level.Game).bDidSpottedFleshpoundMessage && FRand() < 0.25 )
-            {
+            if (!KFGameType(Level.Game).bDidSpottedFleshpoundMessage && FRand() < 0.25) {
                 PlayerController(SeenPlayer.Controller).Speech('AUTO', 12, "");
                 KFGameType(Level.Game).bDidSpottedFleshpoundMessage = true;
             }
-
             bDoneSpottedCheck = true;
         }
 
@@ -36,20 +34,18 @@ state ZombieHunt
     }
 }
 
-// Don't ever do this
-function AvoidThisMonster(KFMonster Feared){}
-
-function bool FireWeaponAt(Actor A)
-{
-    if ( A == none )
+function bool FireWeaponAt(Actor A) {
+    if (A == none) {
         A = Enemy;
-    if ( (A == none) || (Focus != A) )
+    }
+    if (A == none || Focus != A) {
         return false;
+    }
     Target = A;
 
-    if( (VSize(A.Location - Pawn.Location) >= ZFPRA(Pawn).MeleeRange + Pawn.CollisionRadius + Target.CollisionRadius) &&
-        ZFPRA(Pawn).LastChainGunTime - Level.TimeSeconds > 0 )
-    {
+    if ((VSize(A.Location - Pawn.Location) >= ZFPRA(Pawn).MeleeRange + Pawn.CollisionRadius + Target.CollisionRadius) &&
+        ZFPRA(Pawn).LastChainGunTime - Level.TimeSeconds > 0
+    ) {
         return false;
     }
 
@@ -57,33 +53,27 @@ function bool FireWeaponAt(Actor A)
     return false;
 }
 
-function TimedFireWeaponAtEnemy()
-{
-    if ( (Enemy == none) || FireWeaponAt(Enemy) )
+function TimedFireWeaponAtEnemy() {
+    if (Enemy == none || FireWeaponAt(Enemy)) {
         SetCombatTimer();
-    else
+    } else {
         SetTimer(0.01, true);
+    }
 }
 
-
-state ZombieCharge
-{
-    function Tick( float Delta )
-    {
+state ZombieCharge {
+    function Tick(float Delta) {
         local ZFPRA ZFP;
-        Global.Tick(Delta);
 
+        global.Tick(Delta);
         // Make the FP rage if we haven't reached our enemy after a certain amount of time
-        if( RageFrustrationTimer < RageFrustrationThreshhold )
-        {
+        if (RageFrustrationTimer < RageFrustrationThreshhold) {
             RageFrustrationTimer += Delta;
 
-            if( RageFrustrationTimer >= RageFrustrationThreshhold )
-            {
+            if (RageFrustrationTimer >= RageFrustrationThreshhold) {
                 ZFP = ZFPRA(Pawn);
 
-                if( ZFP != none && !ZFP.bChargingPlayer )
-                {
+                if (ZFP != none && !ZFP.bChargingPlayer) {
                     ZFP.StartCharging();
                     ZFP.bFrustrated = true;
                 }
@@ -91,25 +81,21 @@ state ZombieCharge
         }
     }
 
-    function bool StrafeFromDamage(float Damage, class<DamageType> DamageType, bool bFindDest)
-    {
+    function bool StrafeFromDamage(float Damage, class<DamageType> DamageType, bool bFindDest) {
         return false;
     }
 
-    function bool TryStrafe(vector sideDir)
-    {
+    function bool TryStrafe(vector sideDir) {
         return false;
     }
 
-    function Timer()
-    {
+    function Timer() {
         Disable('NotifyBump');
         Target = Enemy;
         TimedFireWeaponAtEnemy();
     }
 
-    function BeginState()
-    {
+    function BeginState() {
         super.BeginState();
 
         RageFrustrationThreshhold = default.RageFrustrationThreshhold + (Frand() * 5);
@@ -117,49 +103,43 @@ state ZombieCharge
     }
 
 WaitForAnim:
-
-    if ( Monster(Pawn).bShotAnim )
-    {
+    if (Monster(Pawn).bShotAnim) {
         Goto('Moving');
     }
-    if ( !FindBestPathToward(Enemy, false,true) )
+    if (!FindBestPathToward(Enemy, false, true)) {
         GotoState('ZombieRestFormation');
+    }
+
 Moving:
     MoveToward(Enemy);
     WhatToDoNext(17);
-    if ( bSoaking )
+    if (bSoaking) {
         SoakStop("STUCK IN CHARGING!");
+    }
 }
 
-function SetPoundRageTimout(float NewRageTimeOut)
-{
+function SetPoundRageTimout(float NewRageTimeOut) {
     RageAnimTimeout = NewRageTimeOut;
 }
 
-function SetWaitForAnimTimout(float NewWaitAnimTimeout, name AnimToWaitFor)
-{
+function SetWaitForAnimTimout(float NewWaitAnimTimeout, name AnimToWaitFor) {
     WaitAnimTimeout = NewWaitAnimTimeout;
     AnimWaitingFor = AnimToWaitFor;
 }
 
-state WaitForAnim
-{
+state WaitForAnim {
 Ignores SeePlayer,HearNoise,Timer,EnemyNotVisible,NotifyBump,Startle;
 
     function GetOutOfTheWayOfShot(vector ShotDirection, vector ShotOrigin){}
 
-    function BeginState()
-    {
+    function BeginState() {
         bUseFreezeHack = false;
     }
 
     // The rage anim has ended, clear the flags and let the AI do its thing
-    function RageTimeout()
-    {
-        if( bUseFreezeHack )
-        {
-            if( Pawn!=none )
-            {
+    function RageTimeout() {
+        if (bUseFreezeHack) {
+            if (Pawn != none) {
                 Pawn.AccelRate = Pawn.default.AccelRate;
                 Pawn.GroundSpeed = Pawn.default.GroundSpeed;
             }
@@ -168,12 +148,9 @@ Ignores SeePlayer,HearNoise,Timer,EnemyNotVisible,NotifyBump,Startle;
         }
     }
 
-    function WaitTimeout()
-    {
-        if( bUseFreezeHack )
-        {
-            if( Pawn!=none )
-            {
+    function WaitTimeout() {
+        if (bUseFreezeHack) {
+            if (Pawn != none) {
                 Pawn.AccelRate = Pawn.default.AccelRate;
                 Pawn.GroundSpeed = Pawn.default.GroundSpeed;
             }
@@ -183,72 +160,62 @@ Ignores SeePlayer,HearNoise,Timer,EnemyNotVisible,NotifyBump,Startle;
         AnimEnd(AnimWaitChannel);
     }
 
-    event AnimEnd(int Channel)
-    {
-
+    event AnimEnd(int Channel) {
         Pawn.AnimEnd(Channel);
-        if ( !Monster(Pawn).bShotAnim )
+        if (!Monster(Pawn).bShotAnim) {
             WhatToDoNext(99);
+        }
     }
 
-    function Tick( float Delta )
-    {
-        Global.Tick(Delta);
+    function Tick(float Delta) {
+        global.Tick(Delta);
 
-        if( WaitAnimTimeout > 0 )
-        {
+        if (WaitAnimTimeout > 0) {
             WaitAnimTimeout -= Delta;
 
-            if( WaitAnimTimeout <= 0 )
-            {
+            if (WaitAnimTimeout <= 0) {
                 WaitAnimTimeout = 0;
                 WaitTimeout();
             }
         }
 
-        if( RageAnimTimeout > 0 )
-        {
+        if (RageAnimTimeout > 0) {
             RageAnimTimeout -= Delta;
 
-            if( RageAnimTimeout <= 0 )
-            {
+            if (RageAnimTimeout <= 0) {
                 RageAnimTimeout = 0;
                 RageTimeout();
             }
         }
 
-        if( bUseFreezeHack )
-        {
+        if (bUseFreezeHack) {
             MoveTarget = none;
             MoveTimer = -1;
-            Pawn.Acceleration = vect(0,0,0);
+            Pawn.Acceleration = vect(0, 0, 0);
             Pawn.GroundSpeed = 1;
             Pawn.AccelRate = 0;
         }
     }
-    function EndState()
-    {
+
+    function EndState() {
         super.EndState();
 
-        if( Pawn!=none )
-        {
+        if (Pawn != none) {
             Pawn.AccelRate = Pawn.default.AccelRate;
             Pawn.GroundSpeed = Pawn.default.GroundSpeed;
         }
         bUseFreezeHack = false;
-
         AnimWaitingFor = '';
     }
 
 Begin:
-    While( KFM.bShotAnim )
-    {
+    while (KFM.bShotAnim) {
         Sleep(0.15);
     }
     WhatToDoNext(99);
 
 }
-defaultproperties
-{
-     RageFrustrationThreshhold=10.000000
+
+defaultproperties {
+    RageFrustrationThreshhold=10.000000
 }
